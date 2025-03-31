@@ -27,6 +27,11 @@ mkdir -p ~/wifi_ws/src
 cd ~/wifi_ws/src
 git clone https://github.com/slgrobotics/wifi_strength_logger.git
 cd ~/wifi_ws
+
+sudo rosdep init    # do it once, if you haven't done it before
+rosdep update
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
+
 colcon build
 ```
 
