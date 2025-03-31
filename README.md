@@ -6,15 +6,43 @@ https://github.com/wimblerobotics/Sigyn/tree/main/wifi_signal_visualizer
 
 All credits go to Michael Wimble and his work on [Sigyn](https://github.com/wimblerobotics/Sigyn) robot, which has been my inspiration and the source of shameless borrowing.
 
+**Note:** this software runs under **Ubuntu 24.04** and **ROS2 Jazzy**. Familiarity with these environments is required.
+
 ## Use cases
 
 My version of WiFi Signal Strength Logger can be used as part of a robot, or as an independent device. 
 
 When the package is compiled and deployed as a robot's component (_Node_), it subscribes to robot's source of coordinates (odometry or GPS topic) and logs WiFi signal data in a _sqlite3_ database.
 
-When used on a dedicated device, it does the same - but that device should have ROS2 GPS Node running.
+When used on a dedicated device, it does the same - but that device should have ROS2 GPS Node running. A Raspberry Pi can host this software.
 
-A companion program (_Visualizer_) is used to overlay accumulated data from _sqlite3_ on a Google map.
+A companion program (_HeatMapper_) is used to overlay accumulated data from _sqlite3_ on a Google map, creating a _WiFi coverage map_ (a.k.a. "_heat map_").
+It can be used after the logger completed the survey, or while doing the survey.
 
 ## Build and Deployment
+
+This is how to build the package:
+```
+mkdir -p ~/wifi_ws/src
+cd ~/wifi_ws/src
+git clone https://github.com/slgrobotics/wifi_strength_logger.git
+cd ~/wifi_ws
+colcon build
+```
+
+## Useful Links
+
+Similar software for iOS and Android (just for reference, I haven't used any of these):
+
+[WiFi Heatmap](https://play.google.com/store/apps/details?id=ua.com.wifisolutions.wifiheatmap&hl=en_US&pli=1)
+
+[ekahau WiFi Heatmaps](https://www.ekahau.com/solutions/wi-fi-heatmaps/)
+
+[NetSpot](https://www.netspotapp.com/wifi-heat-map/best-wifi-heatmap-software.html)  (available for [iOS](https://apps.apple.com/us/app/netspot-wifi-analyzer/id1490247223))
+
+For _robot software_ see:
+
+[My Robots](https://github.com/slgrobotics/robots_bringup)
+
+[Michael Wimble - Sigyn](https://github.com/wimblerobotics/Sigyn)
 
