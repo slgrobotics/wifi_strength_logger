@@ -49,3 +49,5 @@ ROS2 Jazzy setup:
 For _robot software_ see:
 - Michael Wimble - [Sigyn](https://github.com/wimblerobotics/Sigyn) - don't forget to _star_ it on GitHub
 - My Robots - [Plucky, Dragger, Turtle](https://github.com/slgrobotics/robots_bringup)
+
+Please see [MIT License](https://github.com/slgrobotics/wifi_strength_logger/blob/main/LICENSE) for this repository
