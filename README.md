@@ -33,16 +33,14 @@ colcon build
 ## Useful Links
 
 Similar software for iOS and Android (just for reference, I haven't used any of these):
+- [WiFi Heatmap](https://play.google.com/store/apps/details?id=ua.com.wifisolutions.wifiheatmap&hl=en_US&pli=1)
+- [ekahau WiFi Heatmaps](https://www.ekahau.com/solutions/wi-fi-heatmaps/)
+- [NetSpot](https://www.netspotapp.com/wifi-heat-map/best-wifi-heatmap-software.html)  (available for [iOS](https://apps.apple.com/us/app/netspot-wifi-analyzer/id1490247223))
 
-[WiFi Heatmap](https://play.google.com/store/apps/details?id=ua.com.wifisolutions.wifiheatmap&hl=en_US&pli=1)
-
-[ekahau WiFi Heatmaps](https://www.ekahau.com/solutions/wi-fi-heatmaps/)
-
-[NetSpot](https://www.netspotapp.com/wifi-heat-map/best-wifi-heatmap-software.html)  (available for [iOS](https://apps.apple.com/us/app/netspot-wifi-analyzer/id1490247223))
+ROS2 Jazzy setup:
+- Intel Desktop: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
+- Raspberry Pi: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
 For _robot software_ see:
-
-[My Robots](https://github.com/slgrobotics/robots_bringup)
-
-[Michael Wimble - Sigyn](https://github.com/wimblerobotics/Sigyn)
-
+- Michael Wimble - [Sigyn](https://github.com/wimblerobotics/Sigyn) - don't forget to _star_ it on GitHub
+- My Robots - [Plucky, Dragger, Turtle](https://github.com/slgrobotics/robots_bringup)
