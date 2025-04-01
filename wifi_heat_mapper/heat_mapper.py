@@ -7,12 +7,71 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import sqlite3
 
 # Generate some sample data (replace with your actual data)
-data = np.random.rand(10, 12)
+heat_data = np.random.rand(10, 12)
+
+db_path = '/home/sergei/wifi_ws/src/wifi_strength_logger/database/wifi_data.db'
+
+try:
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT x,y,bit_rate,link_quality,signal_level FROM wifi_data")
+    #cursor.execute("SELECT * FROM wifi_data")
+    #cursor.execute("SELECT count(*) FROM wifi_data")
+    rows = np.array(cursor.fetchall())
+    rows = np.round(rows, decimals=1) * 10
+
+    conn.close()
+    row_count = len(rows)
+    #row_count = rows
+
+    print(f"Number of rows: {row_count}")
+    print(f"Row 0: {rows[0]}")
+    print(f"Row 0 [0] = x: {rows[0][0]}")
+    print(f"Row 0 [1] = y: {rows[0][1]}")
+    print(f"Row 0 [2] = bit_rate: {rows[0][2]}")
+    print(f"Row 0 [3] = link_quality: {rows[0][3]}")
+    print(f"Row 0 [4] = signal_level: {rows[0][4]}")
+
+    min_arr = np.min(rows, axis=0)
+    min_x = min_arr[0]
+    min_y = min_arr[1]
+
+    max_arr = np.max(rows, axis=0)
+    max_x = max_arr[0]
+    max_y = max_arr[1]
+
+    print(f"min: {min}")
+    print(f"max: {max}")
+    
+    print(f"min_x: {min_x}  max_x: {max_x}")
+    print(f"min_y: {min_y}  max_y: {max_y}")
+
+    dim_x = int( max_x - min_x)
+    dim_y = int(max_y - min_y)
+    print(f"dim_x: {dim_x}  dim_y: {dim_y}")
+
+    #heat_data = np.array(dim_x, dim_y)
+    heat_data = np.random.rand(dim_x, dim_y)
+
+    for y in range(dim_y):
+        for x in range(dim_x):
+            heat_data[x][y] = None
+            for row in rows:
+                if int(row[0])-min_x==x and int(row[1])-min_y==y:
+                    heat_data[x][y] = row[4] / 10
+                    print(heat_data[x][y])
+        print(f"---- {y}")
+
+except sqlite3.Error as e:
+    print(f"Error: retrieving wifi data: {e}")
+
 
 # Create the heatmap
-sns.heatmap(data, annot=True, cmap='viridis', fmt=".2f", linewidths=.5)
+sns.heatmap(heat_data, annot=True, cmap='viridis', fmt=".2f", linewidths=.5)
 
 # Customize the plot (optional)
 plt.title('Example Heatmap')
