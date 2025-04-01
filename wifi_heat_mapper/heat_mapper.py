@@ -37,12 +37,12 @@ try:
     print(f"Row 0 [4] = signal_level: {rows[0][4]}")
 
     min_arr = np.min(rows, axis=0)
-    min_x = min_arr[0]
-    min_y = min_arr[1]
+    min_x = math.floor(min_arr[0])
+    min_y = math.floor(min_arr[1])
 
     max_arr = np.max(rows, axis=0)
-    max_x = max_arr[0]
-    max_y = max_arr[1]
+    max_x = math.ceil(max_arr[0])
+    max_y = math.ceil(max_arr[1])
 
     print(f"min: {min}")
     print(f"max: {max}")
@@ -50,20 +50,22 @@ try:
     print(f"min_x: {min_x}  max_x: {max_x}")
     print(f"min_y: {min_y}  max_y: {max_y}")
 
+    # dimensions of the drawing space:
     dim_x = int(math.ceil(max_x)) - int(math.floor(min_x)) + 3
     dim_y = int(math.ceil(max_y)) - int(math.floor(min_y)) + 3
-    print(f"dim_x: {dim_x}  dim_y: {dim_y}")
+    print(f"drawing space: dim_x: {dim_x}  dim_y: {dim_y}")
 
-    heat_data = np.zeros((dim_y, dim_x))
+    heat_data = np.zeros((dim_y, dim_x)) # somehow x and y are inverted when drawing heatmap
 
     for y in range(dim_y):
         for x in range(dim_x):
-            heat_data[y][x] = None
+            heat_data[y][x] = None # comment this out to see zeroes instead of white space
             for row in rows:
+                # find data_x and data_y in rows matching our position (x,y) in drawing space:
                 data_x = int(round(row[0]-min_x))+1
                 data_y = int(round(row[1]-min_y))+1
                 if data_x==x and data_y==y:
-                    heat_data[y][x] = math.floor(row[4] / scale_factor)
+                    heat_data[y][x] = math.floor(row[4] / scale_factor) # scale it back, round down
                     print(f"{data_x} {data_y}   {x} {y} {heat_data[y][x]}")
         print(f"---- end Y {y}")
 
@@ -72,7 +74,7 @@ except sqlite3.Error as e:
 
 
 # Create the heatmap
-sns.heatmap(heat_data, annot=True, cmap='viridis', fmt=".0f", linewidths=.5)
+sns.heatmap(heat_data, annot=True, cmap='viridis', fmt=".0f", linewidths=.2)
 
 # Customize the plot (optional)
 plt.title('Example Heatmap')
