@@ -1,6 +1,8 @@
 ## sqlite3 Database installation
 
 https://linuxcapable.com/how-to-install-sqlite-on-ubuntu-linux/
+
+I am using Ubuntu 24.04 on Intel Desktops and Raspberry Pi 4 and 5
 ```
 sudo apt install sqlite3
 sqlite3 --version
