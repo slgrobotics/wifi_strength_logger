@@ -85,9 +85,9 @@ ax = sns.heatmap(heat_data, annot=True, cmap='coolwarm', fmt=".0f", linewidths=.
 ax.invert_yaxis()
 
 # Customize the plot (optional)
-plt.title('Example Heatmap')
-plt.xlabel('X-axis Label')
-plt.ylabel('Y-axis Label')
+plt.title('WiFi Signal Strength Heatmap')
+plt.xlabel('X-axis Travel')
+plt.ylabel('Y-axis Travel')
 
 # Display the heatmap
 plt.show()
