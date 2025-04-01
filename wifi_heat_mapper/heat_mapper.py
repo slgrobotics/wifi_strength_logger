@@ -10,10 +10,9 @@ import numpy as np
 import math
 import sqlite3
 
-# Generate some sample data (replace with your actual data)
-heat_data = np.random.rand(10, 12)
-
 db_path = '/home/sergei/wifi_ws/src/wifi_strength_logger/database/wifi_data.db'
+
+scale_factor = 5 # map scale, larger value causes finer grid
 
 try:
     conn = sqlite3.connect(db_path)
@@ -23,7 +22,7 @@ try:
     #cursor.execute("SELECT * FROM wifi_data")
     #cursor.execute("SELECT count(*) FROM wifi_data")
     rows = np.array(cursor.fetchall())
-    rows = np.round(rows, decimals=1) * 10
+    rows = np.round(rows, decimals=1) * scale_factor
 
     conn.close()
     row_count = len(rows)
@@ -51,21 +50,22 @@ try:
     print(f"min_x: {min_x}  max_x: {max_x}")
     print(f"min_y: {min_y}  max_y: {max_y}")
 
-    dim_x = int(math.ceil(max_x)) - int(math.floor(min_x))
-    dim_y = int(math.ceil(max_y)) - int(math.floor(min_y))
+    dim_x = int(math.ceil(max_x)) - int(math.floor(min_x)) + 3
+    dim_y = int(math.ceil(max_y)) - int(math.floor(min_y)) + 3
     print(f"dim_x: {dim_x}  dim_y: {dim_y}")
 
-    heat_data = np.zeros((dim_x, dim_y))
-    #heat_data = np.random.rand(dim_x, dim_y)
+    heat_data = np.zeros((dim_y, dim_x))
 
     for y in range(dim_y):
         for x in range(dim_x):
-            heat_data[x][y] = None
+            heat_data[y][x] = None
             for row in rows:
-                if int(round(row[0]-min_x))==x and int(round(row[1]-min_y))==y:
-                    heat_data[x][y] = row[4] / 10
-                    print(heat_data[x][y])
-        print(f"---- {y}")
+                data_x = int(round(row[0]-min_x))+1
+                data_y = int(round(row[1]-min_y))+1
+                if data_x==x and data_y==y:
+                    heat_data[y][x] = math.floor(row[4] / scale_factor)
+                    print(f"{data_x} {data_y}   {x} {y} {heat_data[y][x]}")
+        print(f"---- end Y {y}")
 
 except sqlite3.Error as e:
     print(f"Error: retrieving wifi data: {e}")
