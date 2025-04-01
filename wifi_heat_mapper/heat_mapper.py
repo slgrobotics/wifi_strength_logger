@@ -57,6 +57,9 @@ try:
 
     heat_data = np.zeros((dim_y, dim_x)) # somehow x and y are inverted when drawing heatmap
 
+    hd_min = +1000.0
+    hd_max = -1000.0
+    
     for y in range(dim_y):
         for x in range(dim_x):
             heat_data[y][x] = None # comment this out to see zeroes instead of white space
@@ -65,7 +68,10 @@ try:
                 data_x = int(round(row[0]-min_x))+1
                 data_y = int(round(row[1]-min_y))+1
                 if data_x==x and data_y==y:
-                    heat_data[y][x] = math.floor(row[4] / scale_factor) # scale it back, round down
+                    hd_val = math.floor(row[4] / scale_factor) # signal_level=4; scale it back, round down
+                    hd_min = min(hd_min, hd_val)
+                    hd_max = max(hd_max, hd_val)
+                    heat_data[y][x] = hd_val
                     print(f"{data_x} {data_y}   {x} {y} {heat_data[y][x]}")
         print(f"---- end Y {y}")
 
@@ -74,7 +80,8 @@ except sqlite3.Error as e:
 
 
 # Create the heatmap
-sns.heatmap(heat_data, annot=True, cmap='viridis', fmt=".0f", linewidths=.2)
+sns.heatmap(heat_data, annot=True, cmap='coolwarm', fmt=".0f", linewidths=.2, vmin=hd_min, vmax=hd_max)
+# https://seaborn.pydata.org/tutorial/color_palettes.html
 
 # Customize the plot (optional)
 plt.title('Example Heatmap')
