@@ -40,3 +40,4 @@ CREATE TABLE wifi_data (
                 );
 sqlite> 
 ```
+Refer also to https://github.com/wimblerobotics/Sigyn/blob/main/Documentation/Notes/wifi_signal.md
