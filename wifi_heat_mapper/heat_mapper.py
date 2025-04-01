@@ -80,8 +80,9 @@ except sqlite3.Error as e:
 
 
 # Create the heatmap
-sns.heatmap(heat_data, annot=True, cmap='coolwarm', fmt=".0f", linewidths=.2, vmin=hd_min, vmax=hd_max)
+ax = sns.heatmap(heat_data, annot=True, cmap='coolwarm', fmt=".0f", linewidths=.2, vmin=hd_min, vmax=hd_max)
 # https://seaborn.pydata.org/tutorial/color_palettes.html
+ax.invert_yaxis()
 
 # Customize the plot (optional)
 plt.title('Example Heatmap')
