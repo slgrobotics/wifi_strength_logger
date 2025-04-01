@@ -7,6 +7,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import math
 import sqlite3
 
 # Generate some sample data (replace with your actual data)
@@ -50,18 +51,18 @@ try:
     print(f"min_x: {min_x}  max_x: {max_x}")
     print(f"min_y: {min_y}  max_y: {max_y}")
 
-    dim_x = int( max_x - min_x)
-    dim_y = int(max_y - min_y)
+    dim_x = int(math.ceil(max_x)) - int(math.floor(min_x))
+    dim_y = int(math.ceil(max_y)) - int(math.floor(min_y))
     print(f"dim_x: {dim_x}  dim_y: {dim_y}")
 
-    #heat_data = np.array(dim_x, dim_y)
-    heat_data = np.random.rand(dim_x, dim_y)
+    heat_data = np.zeros((dim_x, dim_y))
+    #heat_data = np.random.rand(dim_x, dim_y)
 
     for y in range(dim_y):
         for x in range(dim_x):
             heat_data[x][y] = None
             for row in rows:
-                if int(row[0])-min_x==x and int(row[1])-min_y==y:
+                if int(round(row[0]-min_x))==x and int(round(row[1]-min_y))==y:
                     heat_data[x][y] = row[4] / 10
                     print(heat_data[x][y])
         print(f"---- {y}")
@@ -71,7 +72,7 @@ except sqlite3.Error as e:
 
 
 # Create the heatmap
-sns.heatmap(heat_data, annot=True, cmap='viridis', fmt=".2f", linewidths=.5)
+sns.heatmap(heat_data, annot=True, cmap='viridis', fmt=".0f", linewidths=.5)
 
 # Customize the plot (optional)
 plt.title('Example Heatmap')
