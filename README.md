@@ -39,6 +39,22 @@ rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 colcon build
 ```
 
+## Running the Nodes
+
+To run either node separately or together use the following commands:
+```
+ros@plucky:~/robot_ws$ ros2 launch wifi_logger_visualizer wifi_logger.launch.py
+
+ros@plucky:~/robot_ws$ ros2 launch wifi_logger_visualizer wifi_visualizer.launch.py
+
+ros@plucky:~/robot_ws$ ros2 launch wifi_logger_visualizer wifi_logger.launch.py
+```
+**Note:** _sqlite3_ database file will be created in the directory where you run Logger node: 
+```
+-rw-r--r--  1 ros ros 102400 Apr  2 12:09 wifi_data.db
+```
+Refer to [database](https://github.com/slgrobotics/wifi_strength_logger/tree/main/database) folder for viewing the data.
+
 ## Useful Links
 
 Similar software for iOS and Android (just for reference, I haven't used any of these):
