@@ -14,11 +14,19 @@ Usage and general info:
 - https://www.sqlite.org/
 - https://github.com/wimblerobotics/Sigyn/blob/main/Documentation/Notes/wifi_signal.md
 
-Simple commands:
+The ```wifi_data.db``` database file is created in the current directory when you run Logger node:
+```
+ros2 launch wifi_logger_visualizer wifi_logger.launch.py
+```
+
+Simple commands (note the semicolon at the end):
 ```
 ~/wimble_ws/src/Sigyn/wifi_signal_visualizer$ sqlite3 ../wifi_data.db
    SQLite version 3.45.1 2024-01-30 16:01:20
 Enter ".help" for usage hints.
+
+sqlite> select count(*) from wifi_data;
+476
 
 sqlite> .headers ON
 sqlite> SELECT * from wifi_data LIMIT 2;
