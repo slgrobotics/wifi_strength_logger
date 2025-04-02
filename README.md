@@ -23,7 +23,7 @@ It can be used after the logger completed the survey, or while doing the survey.
 
 Install Python prerequisites:
 ```
-sudo apt install python3-scipy wireless-tools
+sudo apt install python3-scipy wireless-tools sqlite3
 ```
 This is how to build the package:
 ```
