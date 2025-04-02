@@ -21,7 +21,7 @@ It can be used after the logger completed the survey, or while doing the survey.
 
 ## Build and Deployment
 
-Install Python prerequisites:
+Install Python prerequisites, WiFi query tools and database:
 ```
 sudo apt install python3-scipy wireless-tools sqlite3
 ```
