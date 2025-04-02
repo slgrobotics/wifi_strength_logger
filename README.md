@@ -1,8 +1,8 @@
-## WiFi Signal Strength Logger
+## WiFi Signal Strength Logger and Visualizer
 
 This repository contains slightly modified code by Michael Wimble, the original is here:
 
-https://github.com/wimblerobotics/Sigyn/tree/main/wifi_signal_visualizer
+https://github.com/wimblerobotics/wifi_logger_visualizer
 
 All credits go to Michael Wimble and his work on [Sigyn](https://github.com/wimblerobotics/Sigyn) robot, which has been my inspiration and the source of shameless borrowing.
 
