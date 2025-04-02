@@ -21,6 +21,10 @@ It can be used after the logger completed the survey, or while doing the survey.
 
 ## Build and Deployment
 
+Install Python prerequisites:
+```
+sudo apt install python3-scipy
+```
 This is how to build the package:
 ```
 mkdir -p ~/wifi_ws/src
