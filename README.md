@@ -10,13 +10,16 @@ All credits go to Michael Wimble and his work on [Sigyn](https://github.com/wimb
 
 ## Use cases
 
-My version of WiFi Signal Strength Logger can be used as part of a robot, or as an independent device. 
+WiFi Signal Strength Logger can be used as part of a robot, or (maybe) as an independent device. 
 
-When the package is compiled and deployed as a robot's component (_Node_), it subscribes to robot's source of coordinates (odometry or GPS topic) and logs WiFi signal data in a _sqlite3_ database.
+When the package is compiled and deployed as a robot's component (_Node_), the _wifi_logger_node.py_ node subscribes to robot's source of coordinates (odometry or GPS topic) 
+and logs WiFi signal data in a _sqlite3_ database.
+The _wifi_visualizer_node.py_ node queries the database and publishes three "costmap" topics, which can be displayed in RViz2.
 
-When used on a dedicated device, it does the same - but that device should have ROS2 GPS Node running. A Raspberry Pi can host this software.
+When used on a dedicated device, it could do the logging part, with the _wifi_logger_node.py_ and ROS2 GPS Node running. A Raspberry Pi can host this software.
 
-A companion program (_HeatMapper_) is used to overlay accumulated data from _sqlite3_ on a Google map, creating a _WiFi coverage map_ (a.k.a. "_heat map_").
+A companion program (_HeatMapper_) is used to display accumulated data from _sqlite3_ database (or, potentially, overlay it on a Google map when surveying outdoors), 
+creating a _WiFi coverage map_ (a.k.a. "_heat map_").
 It can be used after the logger completed the survey, or while doing the survey.
 
 ## Build and Deployment
