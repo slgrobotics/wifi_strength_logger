@@ -39,6 +39,7 @@ sudo rosdep init    # do it once, if you haven't done it before
 rosdep update
 rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 
+cd ~/wifi_ws
 colcon build
 ```
 
@@ -46,11 +47,14 @@ colcon build
 
 To run either node separately or together use the following commands:
 ```
-ros@plucky:~/robot_ws$ ros2 launch wifi_logger_visualizer wifi_logger.launch.py
+cd ~/wifi_ws
+source install/setup.bash
 
-ros@plucky:~/robot_ws$ ros2 launch wifi_logger_visualizer wifi_visualizer.launch.py
+ros2 launch wifi_logger_visualizer wifi_logger.launch.py
 
-ros@plucky:~/robot_ws$ ros2 launch wifi_logger_visualizer wifi_logger.launch.py
+ros2 launch wifi_logger_visualizer wifi_visualizer.launch.py
+
+ros2 launch wifi_logger_visualizer wifi_logger_visualizer.launch.py
 ```
 **Note:** _sqlite3_ database file will be created in the directory where you run Logger node: 
 ```
