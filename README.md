@@ -4,7 +4,7 @@ This repository contains slightly modified code by Michael Wimble, the original 
 
 https://github.com/wimblerobotics/wifi_logger_visualizer
 
-All credits go to Michael Wimble and his work on [Sigyn](https://github.com/wimblerobotics/Sigyn) robot, which has been my inspiration and the source of shameless borrowing.
+All credits go to Michael Wimble.
 
 **Note:** this software runs under **Ubuntu 24.04** and **ROS2 Jazzy**. Familiarity with these environments is required.
 
@@ -45,6 +45,47 @@ colcon build
 
 ## Running the Nodes
 
+This package provides three main nodes:
+
+1. **WiFi Logger Node**: Collects WiFi signal data (link quality, signal level, bit rate) at the robot's current position and stores it in a SQLite database.
+2. **WiFi Visualizer Node**: Reads data from the database and publishes cost maps showing WiFi signal strength across the environment.
+3. **Heat Mapper Node**: Provides alternative visualization options including heat maps and value markers.
+
+## Features
+
+- Real-time WiFi signal data collection
+- Automatic position tracking using odometry and transforms
+- SQLite database storage for persistent data
+- Three different cost map visualizations:
+  - Link Quality (0-1)
+  - Signal Level (-90 to -30 dBm)
+  - Bit Rate (0-1000 Mb/s)
+- Configurable interpolation distance
+- Automatic database change detection
+- Optimized for real-time performance
+- Heat map visualization with matplotlib
+- Value markers with color-coded signal strength
+- Text annotations showing exact signal values
+- Configurable scale factor for visualization
+
+Parameters:
+- `standalone`: Whether to display matplotlib visualization (true) or publish markers (false) (default: false)
+- `db_path`: Path to the SQLite database file (default: **wifi_data.db** in current directory)
+- `scale_factor`: Scale factor for the heat map visualization (default: 1.0)
+- `text_size`: Size of the text markers in meters (default: 0.08)
+- `do_publish_markers`: Whether to publish value markers (default: true). Markers are published to the **/wifi_heat_markers** topic.
+- `do_publish_text_markers`: Whether to publish text markers (default: true) Markers are published to the **/wifi_heat_text_markers** topic.
+
+The heat mapper node can operate in two modes:
+1. **Standalone Mode**: Displays a matplotlib heat map with signal strength values
+2. **ROS Mode**: Publishes visualization markers that can be viewed in rviz2:
+   - Value markers showing signal strength with color gradients
+   - Text markers displaying exact signal values
+   - Topics:
+     - **/wifi_heat_markers**: Color-coded value markers
+     -  **/wifi_heat_text_markers**: Text annotations with signal values
+
+
 To run either node separately or together use the following commands:
 ```
 cd ~/wifi_ws
@@ -74,7 +115,8 @@ ROS2 Jazzy setup:
 - Raspberry Pi: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
 For _robot software_ see:
-- Michael Wimble - [Sigyn](https://github.com/wimblerobotics/Sigyn) - don't forget to _star_ it on GitHub
 - My Robots - [Plucky, Dragger, Turtle](https://github.com/slgrobotics/robots_bringup)
+
+## License
 
 Please see [MIT License](https://github.com/slgrobotics/wifi_strength_logger/blob/main/LICENSE) for this repository
