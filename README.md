@@ -41,9 +41,10 @@ rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 
 cd ~/wifi_ws
 colcon build
+
 ```
 
-## Running the Nodes
+## Overview
 
 This package provides three main nodes:
 
@@ -51,7 +52,7 @@ This package provides three main nodes:
 2. **WiFi Visualizer Node**: Reads data from the database and publishes cost maps showing WiFi signal strength across the environment.
 3. **Heat Mapper Node**: Provides alternative visualization options including heat maps and value markers.
 
-## Features
+### Features
 
 - Real-time WiFi signal data collection
 - Automatic position tracking using odometry and transforms
@@ -85,6 +86,8 @@ The heat mapper node can operate in two modes:
      - **/wifi_heat_markers**: Color-coded value markers
      -  **/wifi_heat_text_markers**: Text annotations with signal values
 
+
+## Running the Nodes
 
 To run either node separately or together use the following commands:
 ```
